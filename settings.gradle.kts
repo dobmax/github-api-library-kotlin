@@ -1,1 +1,1 @@
-rootProject.name = "github-api-kotlin"
+rootProject.name = "github-api-library-kotlin"

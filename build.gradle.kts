@@ -1,36 +1,36 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-    id("org.springframework.boot") version "3.2.0"
-    id("io.spring.dependency-management") version "1.1.4"
-    kotlin("jvm") version "1.9.20"
-    kotlin("plugin.spring") version "1.9.20"
+	id("org.springframework.boot") version libs.versions.spring.boot apply false
+	id("io.spring.dependency-management") version libs.versions.spring.dependency.management
+	id("org.jlleitschuh.gradle.ktlint") version libs.versions.gradle.ktlint
+	id("io.gitlab.arturbosch.detekt") version libs.versions.gradle.detekt
+	kotlin("jvm") version libs.versions.kotlin
+	kotlin("plugin.spring") version libs.versions.kotlin
 }
 
 group = "org.dobmax"
 version = "0.0.1-SNAPSHOT"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_21
+	sourceCompatibility = JavaVersion.VERSION_21
 }
 
 repositories {
-    mavenCentral()
+	mavenCentral()
 }
 
 dependencies {
-    implementation("org.springframework.boot:spring-boot-starter")
-    implementation("org.jetbrains.kotlin:kotlin-reflect")
-    testImplementation("org.springframework.boot:spring-boot-starter-test")
+    detektPlugins(libs.detekt.formatting)
 }
 
 tasks.withType<KotlinCompile> {
-    kotlinOptions {
-        freeCompilerArgs += "-Xjsr305=strict"
-        jvmTarget = "21"
-    }
+	kotlinOptions {
+		freeCompilerArgs += "-Xjsr305=strict"
+		jvmTarget = "21"
+	}
 }
 
 tasks.withType<Test> {
-    useJUnitPlatform()
+	useJUnitPlatform()
 }
