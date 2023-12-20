@@ -1,7 +1,7 @@
-# Project Manager
+# GitHub API Library for Kotlin
 
 ## Overview
-The GitHub API Library Kotlin is a powerful tool designed to streamline and simplify development workflows by providing a user-friendly interface for interacting with the GitHub REST API. This library serves as a bridge between your applications and the GitHub platform, offering developers a seamless experience when integrating [GitHub](https://docs.github.com/en/rest) features into their projects.
+The GitHub API Library for Kotlin is a powerful tool designed to streamline and simplify development workflows by providing a user-friendly interface for interacting with the GitHub REST API. This library serves as a bridge between your applications and the GitHub platform, offering developers a seamless experience when integrating [GitHub](https://docs.github.com/en/rest) features into their projects.
 
 ### Key Features:
 
