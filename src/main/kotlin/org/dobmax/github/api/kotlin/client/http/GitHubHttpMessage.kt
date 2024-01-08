@@ -17,7 +17,7 @@ open class GitHubHttpMessage<T>(
     val method: HttpMethod,
     val headers: MutableMap<String, String> = mutableMapOf(),
     val pathParameters: MutableList<String> = mutableListOf(),
-    val queryParameters: MutableMap<String, String> = mutableMapOf(),
+    val queryParameters: MutableMap<String, List<String>> = mutableMapOf(),
     val body: T?,
 ) : GitHubMessage<T> {
     /**
@@ -56,9 +56,9 @@ open class GitHubHttpMessage<T>(
      */
     fun addParameter(
         key: String,
-        value: String,
+        value: List<String>,
     ) {
-        headers[key] = value
+        queryParameters[key] = value
     }
 
     /**
@@ -66,8 +66,8 @@ open class GitHubHttpMessage<T>(
      *
      * @param pairs representing http query parameter
      */
-    fun addParameters(vararg pairs: Pair<String, String>) {
-        headers.putAll(pairs)
+    fun addParameters(vararg pairs: Pair<String, List<String>>) {
+        queryParameters.putAll(pairs)
     }
 
     /**
@@ -75,7 +75,7 @@ open class GitHubHttpMessage<T>(
      *
      * @param value a path parameter
      */
-    fun addPathParameter(value: String) {
+    fun addPath(value: String) {
         pathParameters.add(value)
     }
 
@@ -84,7 +84,7 @@ open class GitHubHttpMessage<T>(
      *
      * @param values representing path parameters
      */
-    fun addParameters(vararg values: String) {
+    fun addPaths(vararg values: String) {
         pathParameters.addAll(values)
     }
 }

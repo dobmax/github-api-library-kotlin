@@ -11,5 +11,5 @@ interface GitHubClient {
      * @param message containing data to be sent to GitHub API
      * @return message containing data received from GitHub API
      */
-    fun <REQ, RES> call(message: GitHubMessage<REQ>): GitHubMessage<RES>
+    suspend fun <REQ, RES> call(message: GitHubMessage<REQ>): GitHubMessage<RES>
 }

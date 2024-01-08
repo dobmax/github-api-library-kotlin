@@ -13,7 +13,6 @@ import io.ktor.http.HttpMethod
 class GitHubPutMessage<T>(
     headers: MutableMap<String, String> = mutableMapOf(),
     pathParameters: MutableList<String> = mutableListOf(),
-    body: T,
 ) : GitHubHttpMessage<T>(
         method = HttpMethod.Put,
         headers = headers,
