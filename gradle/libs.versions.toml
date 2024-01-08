@@ -5,6 +5,9 @@ gradle-ktlint = "12.0.3"
 gradle-detekt = "1.23.4"
 spring-boot = "3.2.0"
 spring-dependency-management = "1.1.4"
+ktor = "2.3.7"
 
 [libraries]
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "gradle-detekt" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
