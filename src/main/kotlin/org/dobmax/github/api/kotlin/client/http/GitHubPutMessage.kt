@@ -1,6 +1,7 @@
 package org.dobmax.github.api.kotlin.client.http
 
 import io.ktor.http.HttpMethod
+import kotlin.reflect.KClass
 
 /**
  * Represents an HTTP-based message of [HttpMethod.Put] method sending via [GitHubHttpClient]
@@ -10,12 +11,28 @@ import io.ktor.http.HttpMethod
  * @param pathParameters mutable sequence containing HTTP path parameters for a http message to be sent
  * @property body a payload of http message containing data of type [T]
  */
-class GitHubPutMessage<T>(
+class GitHubPutMessage<T, R : Any>(
     headers: MutableMap<String, String> = mutableMapOf(),
     pathParameters: MutableList<String> = mutableListOf(),
-) : GitHubHttpMessage<T>(
+    queryParameters: MutableMap<String, List<String>> = mutableMapOf(),
+    body: T?,
+    responseType: KClass<R>,
+) : GitHubHttpMessage<T, R>(
         method = HttpMethod.Put,
         headers = headers,
         pathParameters = pathParameters,
+        queryParameters = queryParameters,
         body = body,
+        responseType = responseType,
+    ) {
+    /**
+     * Copy constructor
+     */
+    constructor(original: GitHubHttpMessage<T, R>) : this(
+        headers = original.headers.toMutableMap(),
+        pathParameters = original.pathParameters.toMutableList(),
+        queryParameters = original.queryParameters.toMutableMap(),
+        body = original.body,
+        responseType = original.responseType,
     )
+}

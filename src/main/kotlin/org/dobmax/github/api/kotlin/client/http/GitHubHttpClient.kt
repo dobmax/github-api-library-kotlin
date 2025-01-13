@@ -15,8 +15,8 @@ interface GitHubHttpClient : GitHubClient {
      * @param message containing data to be sent to GitHub REST API
      * @return message containing data received from GitHub REST API
      */
-    override suspend fun <REQ, RES> call(message: GitHubMessage<REQ>): GitHubMessage<RES> {
-        return call(message as GitHubHttpMessage<REQ>)
+    override suspend fun <REQ, RES : Any> call(message: GitHubMessage<REQ>): GitHubMessage<RES> {
+        return call(message as GitHubHttpMessage<REQ, RES>)
     }
 
     /**
@@ -25,7 +25,7 @@ interface GitHubHttpClient : GitHubClient {
      * @param message containing data to be sent to GitHub REST API
      * @return message containing data received from GitHub REST API
      */
-    suspend fun <REQ, RES> call(message: GitHubHttpMessage<REQ>): GitHubHttpMessage<RES>
+    suspend fun <REQ, RES : Any> call(message: GitHubHttpMessage<REQ, RES>): GitHubHttpResponse<RES>
 
     /**
      * Makes a call to a GitHub REST API using a given provided [GitHubGetMessage]
@@ -34,8 +34,7 @@ interface GitHubHttpClient : GitHubClient {
      * @param message containing data to be sent to GitHub REST API
      * @return message containing data received from GitHub REST API
      */
-    suspend fun <REQ, RES> get(message: GitHubGetMessage<REQ>): GitHubGetMessage<RES> =
-        call<REQ, RES>(message) as GitHubGetMessage<RES>
+    suspend fun <REQ, RES : Any> get(message: GitHubGetMessage<REQ, RES>): GitHubHttpResponse<RES> = call(message)
 
     /**
      * Makes a call to a GitHub REST API using a given provided [GitHubPostMessage]
@@ -44,8 +43,7 @@ interface GitHubHttpClient : GitHubClient {
      * @param message containing data to be sent to GitHub REST API
      * @return message containing data received from GitHub REST API
      */
-    suspend fun <REQ, RES> post(message: GitHubPostMessage<REQ>): GitHubPostMessage<RES> =
-        call<REQ, RES>(message) as GitHubPostMessage<RES>
+    suspend fun <REQ, RES : Any> post(message: GitHubPostMessage<REQ, RES>): GitHubHttpResponse<RES> = call(message)
 
     /**
      * Makes a call to a GitHub REST API using a given provided [GitHubPatchMessage]
@@ -54,8 +52,7 @@ interface GitHubHttpClient : GitHubClient {
      * @param message containing data to be sent to GitHub REST API
      * @return message containing data received from GitHub REST API
      */
-    suspend fun <REQ, RES> patch(message: GitHubPatchMessage<REQ>): GitHubPatchMessage<RES> =
-        call<REQ, RES>(message) as GitHubPatchMessage<RES>
+    suspend fun <REQ, RES : Any> patch(message: GitHubPatchMessage<REQ, RES>): GitHubHttpResponse<RES> = call(message)
 
     /**
      * Makes a call to a GitHub REST API using a given provided [GitHubPutMessage]
@@ -64,8 +61,7 @@ interface GitHubHttpClient : GitHubClient {
      * @param message containing data to be sent to GitHub REST API
      * @return message containing data received from GitHub REST API
      */
-    suspend fun <REQ, RES> put(message: GitHubPutMessage<REQ>): GitHubPutMessage<RES> =
-        call<REQ, RES>(message) as GitHubPutMessage<RES>
+    suspend fun <REQ, RES : Any> put(message: GitHubPutMessage<REQ, RES>): GitHubHttpResponse<RES> = call(message)
 
     /**
      * Makes a call to a GitHub REST API using a given provided [GitHubDeleteMessage]
@@ -74,6 +70,5 @@ interface GitHubHttpClient : GitHubClient {
      * @param message containing data to be sent to GitHub REST API
      * @return message containing data received from GitHub REST API
      */
-    suspend fun <REQ, RES> delete(message: GitHubDeleteMessage<REQ>): GitHubDeleteMessage<RES> =
-        call<REQ, RES>(message) as GitHubDeleteMessage<RES>
+    suspend fun <REQ, RES : Any> delete(message: GitHubDeleteMessage<REQ, RES>): GitHubHttpResponse<RES> = call(message)
 }

@@ -2,6 +2,7 @@ package org.dobmax.github.api.kotlin.client.http
 
 import io.ktor.http.HttpMethod
 import org.dobmax.github.api.kotlin.client.GitHubMessage
+import kotlin.reflect.KClass
 
 /**
  * Represents an HTTP-based message sending via [GitHubHttpClient] while communicating with GitHub REST API.
@@ -12,13 +13,15 @@ import org.dobmax.github.api.kotlin.client.GitHubMessage
  * @param pathParameters mutable sequence containing HTTP path parameters for a http message to be sent
  * @param queryParameters mutable map containing HTTP query parameters for a http message to be sent
  * @param body a payload of http message containing data of type [T]
+ * @param responseType a type of response body
  */
-open class GitHubHttpMessage<T>(
+open class GitHubHttpMessage<T, R : Any>(
     val method: HttpMethod,
     val headers: MutableMap<String, String> = mutableMapOf(),
     val pathParameters: MutableList<String> = mutableListOf(),
     val queryParameters: MutableMap<String, List<String>> = mutableMapOf(),
     val body: T?,
+    val responseType: KClass<R>,
 ) : GitHubMessage<T> {
     /**
      * Retrieves or sets a payload of this message. Equals to [body].
